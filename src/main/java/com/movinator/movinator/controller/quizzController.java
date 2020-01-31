@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ public class quizzController {
 
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
+        boolean end = false;
         if (session.getAttribute("user") == null) {
 
             return "redirect:/";
@@ -43,8 +45,13 @@ public class quizzController {
         do {
             Random r = new Random();
             long randomChoixe = r.nextInt(68) + 1;
-            movie = movieRepository.findById(randomChoixe).get();
-        } while (movie.getGenres().size() == 0);
+           Optional<Movie> movieOp = movieRepository.findById(randomChoixe);
+           if (movieOp.isPresent()) {
+
+              end = true;
+              movie = movieOp.get();
+           }
+        } while (movie.getGenres().size() == 0 && end);
         model.addAttribute("movie", movie);
         model.addAttribute("count", count);
 
