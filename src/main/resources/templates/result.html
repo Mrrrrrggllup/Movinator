@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movinator</title>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+</head>
+<header>
+    <a th:if="${user.isAdmin == 1}" th:href="@{/adminMovie}">Administration</a>
+    <a th:href="@{/disconnect}">Disconect</a>
+</header>
+<body>
+<h1 class="h1">Results :</h1>
+<button class="movieButon" id="button1">Movie 1</button>
+<button id="button2" class="movieButon">Movie 2</button>
+<button id="button3" class="movieButon"> Movie 3</button>
+<div class="mainContent_quizz">
+    <form method="post" th:action="@{/result}" class="resultForm">
+        <div class="mainContent_quizz mainContent_result" id="movie1">
+            <div class="divQuizz">
+                <div class="moviePicture">
+                    <p>Movie Picture</p>
+                </div>
+                <div class="quizz_movie">
+                    <h2>Title :</h2>
+                    <p style="font-size: 1.5em" th:text="${movie1.getTitle()}"></p>
+                </div>
+                <div class="quizz_pitch">
+                    <h2>Overview :</h2>
+                    <p th:text="${movie1.getPitch()}"></p>
+                </div>
+                <div class="quizz_button">
+                    <div class="btn btn-success">
+                        <label for="cool1">I'll watch it !</label>
+                        <input type="radio" name="voteButton" value="I'll watch it !" id="cool1">
+                    </div>
+                    <div class="btn btn-danger">
+                        <label for="lame1">Seems lame !</label>
+                        <input type="radio" class="btn btn-success" name="voteButton" value="Seems lame !" id="lame1">
+                    </div>
+                </div>
+                <input type="submit" value="Validate" class="btn btn-success">
+            </div>
+        </div>
+        <div class="mainContent_quizz mainContent_result" id="movie2">
+            <div class="divQuizz">
+                <div class="moviePicture">
+                    <p>Movie Picture</p>
+                </div>
+                <div class="quizz_movie">
+                    <h2>Title :</h2>
+                    <p style="font-size: 1.5em" th:text="${movie2.getTitle()}"></p>
+                </div>
+                <div class="quizz_pitch">
+                    <h2>Overview :</h2>
+                    <p th:text="${movie2.getPitch()}"></p>
+                </div>
+                <div class="quizz_button">
+                    <div class="btn btn-success">
+                        <label for="cool2">I'll watch it !</label>
+                        <input type="radio" name="voteButton2" value="I'll watch it !" id="cool2">
+                    </div>
+                    <div class="btn btn-danger">
+                        <label for="lame2">Seems lame !</label>
+                        <input type="radio" class="btn btn-success" name="voteButton2" value="Seems lame !" id="lame2">
+                    </div>
+                </div>
+                <input type="submit" value="Validate" class="btn btn-success">
+            </div>
+        </div>
+        <div class="mainContent_quizz mainContent_result" id="movie3">
+            <div class="divQuizz">
+                <div class="moviePicture">
+                    <p>Movie Picture</p>
+                </div>
+                <div class="quizz_movie">
+                    <h2>Title :</h2>
+                    <p style="font-size: 1.5em" th:text="${movie3.getTitle()}"></p>
+                </div>
+                <div class="quizz_pitch">
+                    <h2>Overview :</h2>
+                    <p th:text="${movie3.getPitch()}"></p>
+                </div>
+                <div class="quizz_button">
+                    <div class="btn btn-success">
+                        <label for="cool3">I'll watch it !</label>
+                        <input type="radio" name="voteButton3" value="I'll watch it !" id="cool3">
+                    </div>
+                    <div class="btn btn-danger">
+                        <label for="lame3">Seems lame !</label>
+                        <input type="radio" class="btn btn-danger" name="voteButton3" value="Seems lame !" id="lame3">
+                    </div>
+                </div>
+                <input type="submit" value="Validate" class="btn btn-success">
+            </div>
+        </div>
+    </form>
+</div>
+<script th:src="@{/js/resultJs.js}"></script>
+<script th:src="@{style/bootstrap/js/jquery.js}"></script>
+<script th:src="@{style/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

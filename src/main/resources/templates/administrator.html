@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Movinator</title>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <a th:if="${user.isAdmin == 1}" th:href="@{/quizz}">Quizz</a>
+    <a th:href="@{/disconnect}">Disconect</a>
+</header>
+<form class="shapeAdmin" th:object="${movie}" th:action="@{/adminMovie}" method="post">
+    <div class="columnRowFlex">
+        <label th:for="idMovie" class="label-film">Movies</label>
+        <div class="select-with-button">
+            <select th:field="*{idMovie}">
+                <option selected value="0">Create a movie</option>
+                <option th:if="${movie != null}" th:each="movieTemp : ${movies}"
+                        th:value="${movieTemp.getIdMovie()}"
+                        th:text="${movieTemp.getTitle()}"
+                        th:selected="${movieTemp.getIdMovie() == movie.getIdMovie()}"></option>
+            </select>
+            <input type="submit" value="choose" class="btn-primary" name="buttonForm">
+        </div>
+        <label th:for="title">Title :</label>
+        <input type="text" th:field="*{title}">
+        <label th:for="genres">Genre :</label>
+        <select th:field="*{genres}" class="select-without-button">
+            <option selected value="0">Select a genre</option>
+            <option th:if="${movie != null && movie.getGenres().size() > 0}" th:each="genreTemp : ${genres}"
+                    th:value="${genreTemp.getIdGenre()}"
+                    th:text="${genreTemp.getGenreName()}"
+                    th:selected="${movie.getGenres().get(0).getIdGenre() == genreTemp.getIdGenre()}"></option>
+            <option th:if="${movie.getIdMovie() == null || movie.getGenres().size() == 0}"
+                    th:each="genreTemp : ${genres}"
+                    th:value="${genreTemp.getIdGenre()}"
+                    th:text="${genreTemp.getGenreName()}"></option>
+        </select>
+        <label th:for="overview">Overview :</label>
+        <textarea th:field="*{pitch}" rows="6" cols="33"></textarea>
+        <input type="submit" class="btn-success" value="submit" name="buttonForm">
+    </div>
+</form>
+
+<script th:src="@{/js/indexSelect.js}"></script>
+<script th:src="@{style/bootstrap/js/jquery.js}"></script>
+<script th:src="@{style/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

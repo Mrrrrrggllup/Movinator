@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movinator</title>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+</head>
+<header>
+    <a th:if="${user.isAdmin == 1}" th:href="@{/adminMovie}">Administration</a>
+    <a th:href="@{/disconnect}">Disconect</a>
+</header>
+<body>
+<div class="mainContent_quizz">
+    <form class="divQuizz" method="post" th:action="@{/quizz}" th:object="${movie}">
+        <div class="moviePicture">
+            <p>Movie Picture</p>
+        </div>
+        <div class="quizz_movie">
+            <h2>Title :</h2>
+            <p style="font-size: 1.5em" th:text="${movie.getTitle()}"></p>
+        </div>
+        <div class="quizz_pitch">
+            <h2>Overview :</h2>
+            <p th:text="${movie.getPitch()}"></p>
+        </div>
+        <input th:field="*{idMovie}" hidden>
+        <input th:value="${count}" name="count" hidden>
+        <div class="quizz_button">
+            <input type="submit" class="btn btn-success" name="voteButton" value="like It !">
+            <input type="submit" class="btn btn-danger" name="voteButton" value="Dislike It !">
+        </div>
+    </form>
+</div>
+<script th:src="@{style/bootstrap/js/jquery.js}"></script>
+<script th:src="@{style/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
